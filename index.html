@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kindness Children Care | Arusha</title>
 
     <meta name="description"
@@ -15,23 +15,66 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Hakikisha body hairuhusu kuscroll pembeni */
         body {
-            min-width: 1200px;
-            /* Inahakikisha website haijikunji (wrap) */
-            overflow-x: auto;
-            /* Inaruhusu kuscroll pembeni kama screen ni ndogo sana */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
 
-        /* Zima menu iliyokuwa inajificha kwenye simu */
+        /* Button ya Menu ionekane tu kwenye simu */
+        .menu-toggle {
+            display: none;
+            font-size: 2.2rem;
+            color: white;
+            cursor: pointer;
+            order: 2;
+            /* Inaiweka mbele ya logo ikihitajika */
+        }
+
         @media (max-width: 768px) {
-            nav {
-                display: flex !important;
-                /* Inarudisha menu ya kompyuta */
+            .menu-toggle {
+                display: block;
+                /* Inaonekana kwenye simu */
             }
 
-            .nav-container {
-                flex-wrap: nowrap !important;
+            nav {
+                display: none !important;
+                /* Inaficha maneno (Home, About...) kwenye simu */
             }
+
+            .logo-text {
+                font-size: 0.8rem;
+                /* Inapunguza ukubwa wa maandishi ya logo */
+                max-width: 180px;
+            }
+        }
+
+        /* Side Nav Style */
+        .side-nav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3000;
+            /* Iwe juu ya kila kitu */
+            top: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            border-left: 2px solid var(--red);
+        }
+
+        .side-nav a {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: white;
+            display: block;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         :root {
@@ -1320,7 +1363,6 @@
 </script>
 
 <body>
-
     <header>
         <div class="nav-container">
             <div class="logo-text">KINDNESS <span>CHILDREN</span> CARE</div>
@@ -1337,14 +1379,13 @@
                 </ul>
             </nav>
 
-            <div class="menu-toggle" onclick="openNav()">&#9776;</div>
+            <div class="menu-toggle" onclick="openNav()">☰</div>
 
             <div class="logo-image">
                 <img src="./logo.jpg" alt="Logo">
             </div>
         </div>
     </header>
-
     <div id="mySideNav" class="side-nav">
         <span class="close-side" onclick="closeNav()">&times;</span>
         <a href="#home" onclick="closeNav()">Home</a>
