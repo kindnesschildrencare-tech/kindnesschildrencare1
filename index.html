@@ -1171,6 +1171,72 @@
         animation: blink 1s infinite;
     }
 
+    /* Button ya Menu kwenye Simu */
+    .menu-toggle {
+        display: none;
+        /* Inajificha kwenye kompyuta */
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Sehemu ya Menu ya Pembeni */
+    .side-nav {
+        height: 100%;
+        width: 0;
+        /* Inaanza ikiwa imejificha */
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(15px);
+        overflow-x: hidden;
+        transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        padding-top: 80px;
+        border-left: 2px solid var(--red);
+    }
+
+    .side-nav a {
+        padding: 15px 30px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: white;
+        display: block;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .side-nav a:hover {
+        color: var(--red);
+        padding-left: 40px;
+    }
+
+    .side-nav .close-side {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 35px;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Marekebisho kwa ajili ya Simu */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+            /* Inaonekana kwenye simu tu */
+        }
+
+        header nav {
+            display: none !important;
+            /* Inaficha menu ya kawaida ya juu */
+        }
+    }
+
     @keyframes blink {
         0% {
             opacity: 1;
@@ -1258,6 +1324,7 @@
     <header>
         <div class="nav-container">
             <div class="logo-text">KINDNESS <span>CHILDREN</span> CARE</div>
+
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -1269,12 +1336,25 @@
                     <li><a href="#contact-info">Contact</a></li>
                 </ul>
             </nav>
+
+            <div class="menu-toggle" onclick="openNav()">&#9776;</div>
+
             <div class="logo-image">
                 <img src="./logo.jpg" alt="Logo">
             </div>
         </div>
     </header>
 
+    <div id="mySideNav" class="side-nav">
+        <span class="close-side" onclick="closeNav()">&times;</span>
+        <a href="#home" onclick="closeNav()">Home</a>
+        <a href="#about us" onclick="closeNav()">About us</a>
+        <a href="#story" onclick="closeNav()">Our story</a>
+        <a href="#leaders" onclick="closeNav()">Our Leaders</a>
+        <a href="#donate" onclick="closeNav()">Donate</a>
+        <a href="#gallery" onclick="closeNav()">Gallery</a>
+        <a href="#contact-info" onclick="closeNav()">Contact</a>
+    </div>
     <section id="home" class="hero">
         <div class="slider">
             <div class="slide active" style="background-image: url('fade1.jpg');"></div>
@@ -1576,7 +1656,24 @@
             <div id="caption" class="glass-card"></div>
         </div>
     </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySideNav").style.width = "280px";
+        }
 
+        function closeNav() {
+            document.getElementById("mySideNav").style.width = "0";
+        }
+
+        // Kufunga menu mtumiaji akibonyeza nje ya menu
+        window.addEventListener('click', function (e) {
+            let sideNav = document.getElementById("mySideNav");
+            let toggleBtn = document.querySelector(".menu-toggle");
+            if (!sideNav.contains(e.target) && e.target !== toggleBtn) {
+                closeNav();
+            }
+        });
+    </script>
     <script>
         // Kodi ya JavaScript niliyokupa iweke hapa
     </script>
