@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=980">
     <title>Kindness Children Care | Arusha</title>
 
     <meta name="description"
@@ -15,15 +15,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Hakikisha body hairuhusu kuscroll pembeni */
         body {
-            /* FUTA min-width: 1200px; */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            /* Hii inazuia website kutingishika pembeni */
-            background-color: var(--dark);
-            color: var(--white);
-            line-height: 1.6;
         }
 
         /* Button ya Menu ionekane tu kwenye simu */
@@ -36,6 +32,51 @@
             /* Inaiweka mbele ya logo ikihitajika */
         }
 
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                /* Inaonekana kwenye simu */
+            }
+
+            nav {
+                display: none !important;
+                /* Inaficha maneno (Home, About...) kwenye simu */
+            }
+
+            .logo-text {
+                font-size: 0.8rem;
+                /* Inapunguza ukubwa wa maandishi ya logo */
+                max-width: 180px;
+            }
+        }
+
+        /* Side Nav Style */
+        .side-nav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3000;
+            /* Iwe juu ya kila kitu */
+            top: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            border-left: 2px solid var(--red);
+        }
+
+        .side-nav a {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: white;
+            display: block;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         :root {
             --dark: #0a0a0a;
             --red: #ff3e3e;
@@ -45,78 +86,112 @@
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* MPANGILIO WA HEADER KWENYE SIMU NA KOMPYUTA */
+        /* --- NAVIGATION & MENU LIQUID STYLES --- */
+
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 5%;
-            width: 100%;
+            padding: 20px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        /* Inaficha menu ya maneno (Home, About...) kwenye simu */
+        /* Jina la Website (Logo Text) */
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            /* Inatoa nafasi ili lisijibane */
+            text-transform: uppercase;
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* Mpangilio wa Menu (Home, About, etc.) */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            /* Nafasi kati ya neno na neno */
+        }
+
+        /* Maneno ya Menu kabla ya kuguswa */
+        .nav-item {
+            text-decoration: none;
+            color: #666666;
+            /* Rangi ya kijivu inayotulia */
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 15px;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- THE ZOOM EFFECT (Inatokea neno likiguswa) --- */
+        .nav-item.active {
+            color: #ffffff !important;
+            /* Inakuwa nyeupe kabisa */
+            transform: scale(1.25);
+            /* Neno linajizoom kama lipo ndani ya maji */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            /* Mng'ao wa kioo */
+            z-index: 10000;
+        }
+
+        /* Tone la Maji Linalotembea */
+        #liquid-capsule {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 9999;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 2px solid rgba(255, 255, 255, 0.8);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                inset -5px -5px 12px rgba(255, 255, 255, 0.1),
+                0 15px 35px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Zoom Effect kwa Maneno (Nav Items Pekee) */
+        .nav-item {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #ffffff !important;
+            transform: scale(1.25);
+            /* Zoom ya kioo */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mobile Adjustments (Kwa ajili ya Simu) */
         @media (max-width: 768px) {
-            nav {
-                display: none !important;
+            nav ul {
+                gap: 15px;
+            }
+
+            .nav-item {
+                font-size: 0.75rem;
+                padding: 5px 10px;
             }
 
             .logo-text {
-                font-size: 0.9rem !important;
-                max-width: 200px;
-            }
-
-            /* Inafanya kadi (About us, Mission) zishuke moja moja chini */
-            .horizontal-layout {
-                flex-direction: column !important;
-            }
-
-            .flex-item {
-                width: 100% !important;
-                margin-bottom: 15px;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
             }
         }
 
-        /* MUONEKANO WA MENU YA PEMBENI (SIDE NAV) */
-        .side-nav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 5000;
-            /* Iwe juu kabisa ya kila kitu */
-            top: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(15px);
-            overflow-x: hidden;
-            transition: 0.4s ease;
-            padding-top: 80px;
-            border-left: 2px solid var(--red);
-        }
-
-        .side-nav a {
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: white;
-            display: block;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-                /* Inatokea kwenye simu pekee */
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         html {
@@ -1288,29 +1363,29 @@
 </script>
 
 <body>
-    <header>
-        <div class="nav-container">
-            <div class="logo-text">KINDNESS <span>CHILDREN</span> CARE</div>
+<header>
+    <div class="nav-container">
+        <div class="logo-text">KINDNESS <span>CHILDREN</span> CARE</div>
 
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about us">About us</a></li>
-                    <li><a href="#story">Our story</a></li>
-                    <li><a href="#leaders">Our Leaders</a></li>
-                    <li><a href="#donate">Donate</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact-info">Contact</a></li>
-                </ul>
-            </nav>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about us">About us</a></li>
+                <li><a href="#story">Our story</a></li>
+                <li><a href="#leaders">Our Leaders</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact-info">Contact</a></li>
+            </ul>
+        </nav>
 
-            <div class="menu-toggle" onclick="openNav()">☰</div>
+        <div class="menu-toggle" onclick="openNav()">☰</div>
 
-            <div class="logo-image">
-                <img src="./logo.jpg" alt="Logo">
-            </div>
+        <div class="logo-image">
+            <img src="./logo.jpg" alt="Logo">
         </div>
-    </header>
+    </div>
+</header>
     <div id="mySideNav" class="side-nav">
         <span class="close-side" onclick="closeNav()">&times;</span>
         <a href="#home" onclick="closeNav()">Home</a>
